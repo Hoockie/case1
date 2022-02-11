@@ -1,0 +1,35 @@
+<template>
+  <div id="app">
+    <button v-for="drink in drinks" :key="drink.idDrink">
+      <label>{{ drink.name }}</label>
+      <label>{{ drink.cost }}</label>
+    </button>
+  </div>
+</template>
+
+<style lang="scss">
+
+</style>
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      drink: [],
+    };
+  },
+
+  methods: {
+    async getData() {
+      const drinks = await axios.get("https://192.168.0.103/api/Drinks");
+      this.drink = drinks.data;
+      console.log(drinks.data);
+    },
+  },
+  mounted() {
+    this.getData();
+  },
+};
+</script>
